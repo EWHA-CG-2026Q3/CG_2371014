@@ -37,3 +37,4 @@ sysinfo.txt
 # Misc
 crashlytics-build.properties
 .DS_Store
+.claude/
