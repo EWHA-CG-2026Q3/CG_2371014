@@ -15,8 +15,6 @@ public class S04_CustomDiamondMesh : MonoBehaviour
             new Vector3(0.5f, -1f, 0.5f), // 5 (새 정점, 아랫꼭짓점)
         };
 
-        // TODO: 아래쪽 삼각형 4개(정점 5 + 허리띠 인접 두 점)를 채우세요.
-        // 힌트: 허리띠는 0→1→2→3→(다시 0) 순서로 이어짐
         int[] triangles = new int[]
         {
             // 위쪽 4면 (정점 4 사용) — 허리띠를 0→1→2→3 순서로 따라가며 위쪽 꼭짓점으로 fan
@@ -25,7 +23,11 @@ public class S04_CustomDiamondMesh : MonoBehaviour
             2, 3, 4,
             3, 0, 4,
 
-            // 아래쪽 4면 (정점 5 사용)
+            // 아래쪽 4면 (정점 5 사용) — 위쪽과 반대 방향으로 감아 바깥쪽을 향하게 함
+            1, 0, 5,
+            2, 1, 5,
+            3, 2, 5,
+            0, 3, 5,
         };
 
         Mesh mesh = new Mesh();
