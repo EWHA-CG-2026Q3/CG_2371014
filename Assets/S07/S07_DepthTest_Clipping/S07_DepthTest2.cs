@@ -7,19 +7,19 @@ public class S07_DepthTest2 : MonoBehaviour
     [SerializeField] private int canvasWidth = 256;
     [SerializeField] private int canvasHeight = 256;
 
-    [SerializeField] private Vector3 vertexA1 = new Vector3(100, 180, 0.3f);
-    [SerializeField] private Vector3 vertexB1 = new Vector3(60, 80, 0.3f);
-    [SerializeField] private Vector3 vertexC1 = new Vector3(180, 80, 0.3f);
+    [SerializeField] private Vector3 vertexA1 = new Vector3(100, 180, 0.5f);
+    [SerializeField] private Vector3 vertexB1 = new Vector3(60, 80, 0.2f);
+    [SerializeField] private Vector3 vertexC1 = new Vector3(180, 80, 0.8f);
     [SerializeField] private Color color1 = new Color(1f, 0.4f, 0.2f, 1f);
 
-    [SerializeField] private Vector3 vertexA2 = new Vector3(150, 200, 0.2f);
+    [SerializeField] private Vector3 vertexA2 = new Vector3(150, 200, 0.5f);
     [SerializeField] private Vector3 vertexB2 = new Vector3(90, 60, 0.8f);
-    [SerializeField] private Vector3 vertexC2 = new Vector3(220, 60, 0.8f);
+    [SerializeField] private Vector3 vertexC2 = new Vector3(220, 60, 0.2f);
     [SerializeField] private Color color2 = new Color(0.2f, 0.5f, 1f, 1f);
 
-    [SerializeField] private Vector3 vertexA3 = new Vector3(210, 220, 0.3f);
-    [SerializeField] private Vector3 vertexB3 = new Vector3(160, 50, 0.6f);
-    [SerializeField] private Vector3 vertexC3 = new Vector3(250, 50, 0.9f);
+    [SerializeField] private Vector3 vertexA3 = new Vector3(210, 220, 0.5f);
+    [SerializeField] private Vector3 vertexB3 = new Vector3(160, 50, 0.2f);
+    [SerializeField] private Vector3 vertexC3 = new Vector3(250, 50, 0.8f);
     [SerializeField] private Color color3 = new Color(0.3f, 0.9f, 0.4f, 1f);
 
     private Texture2D canvasTexture;
@@ -79,10 +79,13 @@ public class S07_DepthTest2 : MonoBehaviour
 
                 if (isInside)
                 {
-                    // TODO 1: w1, w2, w3와 a.z, b.z, c.z를 이용해 보간된 z를 계산하세요.
-                    float interpolatedZ = 0f;
+                    float interpolatedZ = w1 * a.z + w2 * b.z + w3 * c.z;
 
-                    // TODO 2: interpolatedZ가 depthBuffer[x, y]보다 작을 때만 갱신하세요.
+                    if (interpolatedZ < depthBuffer[x, y])
+                    {
+                        canvasTexture.SetPixel(x, y, color);
+                        depthBuffer[x, y] = interpolatedZ;
+                    }
                 }
             }
         }
