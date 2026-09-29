@@ -9,7 +9,9 @@ public class S08_DirectTransform : MonoBehaviour
         RotationNaive,
         Rotate,
         TranslateThenRotate,
-        RotateThenTranslate
+        RotateThenTranslate,
+        TranslateThenScale,
+        ScaleThenTranslate
     }
 
     [SerializeField] DemoMode demoMode = DemoMode.Translation;
@@ -54,6 +56,14 @@ public class S08_DirectTransform : MonoBehaviour
             case DemoMode.RotateThenTranslate:
                 verts = ApplyRotation(baseVertices, angle);
                 verts = ApplyTranslation(verts, translation); // 같은 함수, 순서만 앞에
+                break;
+            case DemoMode.TranslateThenScale:
+                verts = ApplyTranslation(baseVertices, translation);
+                verts = ApplyScale(verts, scale);         // 이동한 뒤 스케일 → 이동량까지 s배로 늘어남
+                break;
+            case DemoMode.ScaleThenTranslate:
+                verts = ApplyScale(baseVertices, scale);
+                verts = ApplyTranslation(verts, translation); // 스케일한 뒤 이동 → 이동량은 t 그대로
                 break;
             default:
                 verts = baseVertices;
