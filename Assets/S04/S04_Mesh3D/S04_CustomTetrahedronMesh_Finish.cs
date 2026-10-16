@@ -37,6 +37,9 @@ public class S04_CustomTetrahedronMesh_Finish : MonoBehaviour
         mesh.RecalculateNormals();
 
         GetComponent<MeshFilter>().mesh = mesh;
-        GetComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        // 인스펙터에서 지정한 재질이 있으면 유지하고, 비어 있을 때만 기본 Lit 재질을 붙임
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer.sharedMaterial == null || meshRenderer.sharedMaterial.shader.name == "Hidden/InternalErrorShader")
+            meshRenderer.sharedMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"));
     }
 }
