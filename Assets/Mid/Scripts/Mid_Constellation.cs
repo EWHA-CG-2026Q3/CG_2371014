@@ -99,7 +99,9 @@ public class Mid_Constellation : MonoBehaviour
     void OnRenderObject()
     {
         // 카메라마다 렌더링 때 Unity가 자동으로 호출함
-        Camera cam = Camera.current;
+        // URP의 Game 뷰에서는 OnRenderObject 안에서 Camera.current가 null로 들어옴 → 그때는 Main Camera를 씀
+        // (카메라는 별과 선을 카메라 쪽으로 돌려 세우는 데만 씀)
+        Camera cam = Camera.current != null ? Camera.current : Camera.main;
         if (glMaterial == null || cam == null) return;
         EnsureInit();
 
