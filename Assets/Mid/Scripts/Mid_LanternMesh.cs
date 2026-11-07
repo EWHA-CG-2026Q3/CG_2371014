@@ -24,6 +24,7 @@ public class Mid_LanternMesh : MonoBehaviour
     public Vector3[] BaseVertices { get; private set; }
     public Mesh Mesh { get; private set; }
     public float Height => height;
+    public float TotalHeight => height + capHeight;   // 바닥부터 뚜껑 꼭대기까지
 
     void Awake()
     {
